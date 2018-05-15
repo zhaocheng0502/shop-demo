@@ -1,5 +1,7 @@
 # shop-admin
 
+> 项目笔记地址：[https://vuejs.circle.ink/eshop-admin/](https://vuejs.circle.ink/eshop-admin/)
+
 > A Vue.js project
 
 ## Build Setup
