@@ -1,6 +1,16 @@
 <template>
 <el-container class="container">
-  <el-header class="header">Header</el-header>
+  <el-header class="header">
+    <el-row>
+      <el-col :span="4">
+        <img src="./logo.png" alt="黑马程序员">
+      </el-col>
+      <el-col :span="16">电商后台管理系统</el-col>
+      <el-col :span="4">
+        <a href="#">退出</a>
+      </el-col>
+    </el-row>
+  </el-header>
   <el-container class="container">
     <el-aside class="aside" width="200px">
       <el-menu
@@ -75,6 +85,7 @@ export default {
 
 <style>
 .header {
+  line-height: 60px;
   background-color: #b3c1cd;
 }
 
