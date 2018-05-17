@@ -1,3 +1,28 @@
-<div>
-  <p>user-list component</p>
-</div>
+<!--
+  表格组件的使用：
+  el-table 组件
+    data 用来绑定表格数据，是一个数组
+    表格组件会根据 data 自动循环渲染
+  el-table-column 组件就是表格列
+    label 属性用来指定列的标题
+    prop 属性用来指定 data 数组中元素项的某个属性
+    width 用来设定表格列的宽度，默认单位是 px
+ -->
+<el-table
+  :data="tableData"
+  style="width: 100%">
+  <el-table-column
+    prop="name"
+    label="日期"
+    width="180">
+  </el-table-column>
+  <el-table-column
+    prop="name"
+    label="姓名"
+    width="180">
+  </el-table-column>
+  <el-table-column
+    prop="address"
+    label="地址">
+  </el-table-column>
+</el-table>
