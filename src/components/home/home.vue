@@ -7,7 +7,7 @@
       </el-col>
       <el-col :span="16">电商后台管理系统</el-col>
       <el-col :span="4">
-        <a href="#">退出</a>
+        <a @click.prevent="handleLogout" href="#">退出</a>
       </el-col>
     </el-row>
   </el-header>
@@ -78,6 +78,13 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleLogout () {
+      // 1. 删除本地存储中的 token，也就是清除登陆状态
+      window.localStorage.removeItem('token')
+
+      // 2. 跳转到 /login
+      this.$router.push('/login')
     }
   }
 }
