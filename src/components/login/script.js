@@ -35,8 +35,13 @@ export default {
 
               // 跳转到首页
               this.$router.push('/')
+
+              this.$message({
+                message: '登陆成功',
+                type: 'success'
+              })
             } else if (status === 400) {
-              window.alert(msg)
+              this.$message.error(msg)
             }
           })
       })
