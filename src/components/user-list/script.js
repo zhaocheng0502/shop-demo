@@ -8,7 +8,8 @@ export default {
   data () {
     return {
       tableData: [],
-      total: 0
+      total: 0,
+      searchText: ''
     }
   },
   methods: {
@@ -58,7 +59,8 @@ export default {
         },
         params: {
           pagenum: page,
-          pagesize: 2
+          pagesize: 2,
+          query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
         }
       }).then(res => {
           const {data, meta} = res.data
@@ -67,6 +69,15 @@ export default {
             this.total = data.total
           }
         })
+    },
+
+    /**
+     * 处理搜索
+     */
+    handleSearch () {
+      // 点击搜索，调用请求方法加载数据列表
+      // 请求方法中会去根据输入框中的内容进行搜索
+      this.loadUsersByPage(1)
     }
   }
 }
