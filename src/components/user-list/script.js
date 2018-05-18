@@ -53,23 +53,41 @@ export default {
     },
 
     /**
-     * 分页请求用户列表
+     * async 方式请求数据
      */
-    loadUsersByPage (page) {
-      this.$http.get('/users', {
+    async loadUsersByPage (page) {
+      const res = await this.$http.get('/users', {
         params: {
           pagenum: page,
           pagesize: 2,
           query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
         }
-      }).then(res => {
-          const {data, meta} = res.data
-          if (meta.status === 200) {
-            this.tableData = data.users
-            this.total = data.total
-          }
-        })
+      })
+      const {data, meta} = res.data
+      if (meta.status === 200) {
+        this.tableData = data.users
+        this.total = data.total
+      }
     },
+
+    /**
+     * 分页请求用户列表
+     */
+    // loadUsersByPage (page) {
+    //   this.$http.get('/users', {
+    //     params: {
+    //       pagenum: page,
+    //       pagesize: 2,
+    //       query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
+    //     }
+    //   }).then(res => {
+    //       const {data, meta} = res.data
+    //       if (meta.status === 200) {
+    //         this.tableData = data.users
+    //         this.total = data.total
+    //       }
+    //     })
+    // },
 
     /**
      * 处理搜索
