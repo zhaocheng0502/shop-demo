@@ -24,6 +24,20 @@ Vue.config.productionTip = false
 // 所有的 axios 请求都会把这个路径作为基准路径去请求
 axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
 
+// 配置 axios 请求守卫（拦截器）
+// 所有 axios 发起的请求都要经过这里
+axios.interceptors.request.use(function (config) {
+  // 在请求拦截器中定制请求头，加入 Authorization token 数据
+  config.headers['Authorization'] = window.localStorage.getItem('token')
+
+  // return config 类似于 next
+  // return config 就是放行的标志
+  return config
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error)
+})
+
 Vue.prototype.$http = axios
 
 // 该规则用以 eslint 代码规范校验的临时规避

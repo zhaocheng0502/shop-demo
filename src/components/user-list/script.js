@@ -57,9 +57,6 @@ export default {
      */
     loadUsersByPage (page) {
       this.$http.get('/users', {
-        headers: {
-          Authorization: window.localStorage.getItem('token')
-        },
         params: {
           pagenum: page,
           pagesize: 2,
@@ -90,10 +87,7 @@ export default {
       this.$http({
         method: 'post',
         url: '/users',
-        data: this.addUserForm,
-        headers: {
-          Authorization: window.localStorage.getItem('token')
-        }
+        data: this.addUserForm
       }).then(res => {
         if (res.data.meta.status === 201) {
           this.$message({
@@ -116,10 +110,7 @@ export default {
     handleChangeState (item) {
       this.$http({
         url: `/users/${item.id}/state/${item.mg_state}`,
-        method: 'put',
-        headers: {
-          Authorization: window.localStorage.getItem('token')
-        }
+        method: 'put'
       }).then(res => {
         if (res.data.meta.status === 200) {
           this.$message({
@@ -141,10 +132,7 @@ export default {
       }).then(() => { // 用户点击 确定 执行这里
         this.$http({
           url: `/users/${item.id}`,
-          method: 'delete',
-          headers: {
-            Authorization: window.localStorage.getItem('token')
-          }
+          method: 'delete'
         }).then(res => {
           if (res.data.meta.status === 200) {
             this.$message({
@@ -174,9 +162,6 @@ export default {
         data: {
           email,
           mobile
-        },
-        headers: {
-          Authorization: window.localStorage.getItem('token')
         }
       }).then(res => {
         if (res.data.meta.status === 200) {
@@ -196,10 +181,7 @@ export default {
     handleShowEditUser (item) {
       this.$http({
         url: `/users/${item.id}`,
-        method: 'get',
-        headers: {
-          Authorization: window.localStorage.getItem('token')
-        }
+        method: 'get'
       }).then(res => {
         if (res.data.meta.status === 200) {
           this.editUserForm = res.data.data
