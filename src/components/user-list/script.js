@@ -169,7 +169,27 @@ export default {
      * 编辑用户
      */
     handleEditUser () {
-      console.log('handleEditUser')
+      const {id, email, mobile} = this.editUserForm
+      axios({
+        url: `http://localhost:8888/api/private/v1/users/${id}`,
+        method: 'put',
+        data: {
+          email,
+          mobile
+        },
+        headers: {
+          Authorization: window.localStorage.getItem('token')
+        }
+      }).then(res => {
+        if (res.data.meta.status === 200) {
+          this.$message({
+            type: 'success',
+            message: '更新成功'
+          })
+          this.editDialogForm = false // 隐藏编辑对话框
+          this.loadUsersByPage(this.currentPage) // 更新当前页码列表数据
+        }
+      })
     },
 
     /**
