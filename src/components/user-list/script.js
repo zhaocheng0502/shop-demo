@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   created () {
     // 页码第一次加载，显示第1页数据
@@ -58,7 +56,7 @@ export default {
      * 分页请求用户列表
      */
     loadUsersByPage (page) {
-      axios.get('http://localhost:8888/api/private/v1/users', {
+      this.$http.get('http://localhost:8888/api/private/v1/users', {
         headers: {
           Authorization: window.localStorage.getItem('token')
         },
@@ -89,7 +87,7 @@ export default {
      * 添加用户
      */
     handleAddUser () {
-      axios({
+      this.$http({
         method: 'post',
         url: 'http://localhost:8888/api/private/v1/users',
         data: this.addUserForm,
@@ -116,7 +114,7 @@ export default {
      * 处理改变用户状态
      */
     handleChangeState (item) {
-      axios({
+      this.$http({
         url: `http://localhost:8888/api/private/v1/users/${item.id}/state/${item.mg_state}`,
         method: 'put',
         headers: {
@@ -141,7 +139,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => { // 用户点击 确定 执行这里
-        axios({
+        this.$http({
           url: `http://localhost:8888/api/private/v1/users/${item.id}`,
           method: 'delete',
           headers: {
@@ -170,7 +168,7 @@ export default {
      */
     handleEditUser () {
       const {id, email, mobile} = this.editUserForm
-      axios({
+      this.$http({
         url: `http://localhost:8888/api/private/v1/users/${id}`,
         method: 'put',
         data: {
@@ -196,7 +194,7 @@ export default {
      * 显示编辑用户对话框
      */
     handleShowEditUser (item) {
-      axios({
+      this.$http({
         url: `http://localhost:8888/api/private/v1/users/${item.id}`,
         method: 'get',
         headers: {

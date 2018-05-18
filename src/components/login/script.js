@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -28,7 +26,7 @@ export default {
         if (!valid) {
           return
         }
-        axios.post('http://localhost:8888/api/private/v1/login', this.loginForm)
+        this.$http.post('http://localhost:8888/api/private/v1/login', this.loginForm)
           .then(res => {
             const {data, meta} = res.data
             const {msg, status} = meta
