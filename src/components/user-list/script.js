@@ -34,6 +34,12 @@ export default {
         mobile: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
         ]
+      },
+      editDialogForm: false,
+      editUserForm: {
+        username: '',
+        email: '',
+        mobile: ''
       }
     }
   },
@@ -157,6 +163,13 @@ export default {
           message: '已取消退出'
         })
       })
+    },
+
+    /**
+     * 编辑用户
+     */
+    handleEditUser () {
+      console.log('handleEditUser')
     }
   }
 }
