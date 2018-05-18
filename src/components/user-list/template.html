@@ -10,15 +10,28 @@
  -->
 <div>
   <el-row>
+    <el-col :span="24">
+      <el-breadcrumb class="breadcrumb" separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+        <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+      </el-breadcrumb>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
     <el-col :span="6">
-      <el-input placeholder="请输入内容" v-model="searchText" class="input-with-select">
+      <el-input placeholder="请输入内容" v-model="searchText">
         <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
       </el-input>
+    </el-col>
+    <el-col :span="2">
+      <el-button type="primary">添加用户</el-button>
     </el-col>
   </el-row>
   <!-- 表格列表 -->
   <el-table
     :data="tableData"
+    class="table"
     style="width: 100%">
     <el-table-column
       prop="username"
