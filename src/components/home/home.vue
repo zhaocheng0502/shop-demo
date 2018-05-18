@@ -75,12 +75,23 @@ export default {
     return {}
   },
   methods: {
+    /**
+     *
+     */
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
     },
+
+    /**
+     *
+     */
     handleClose (key, keyPath) {
       console.log(key, keyPath)
     },
+
+    /**
+     * 用户退出
+     */
     handleLogout () {
       this.$confirm('确认退出吗？', '退出提示', {
         confirmButtonText: '确定',

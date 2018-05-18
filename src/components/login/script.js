@@ -19,6 +19,9 @@ export default {
   },
 
   methods: {
+    /**
+     * 用户登陆
+     */
     handleLogin () {
       // ['form'] 中的 form 就是 el-form 标签 ref 属性值
       this.$refs['form'].validate((valid) => {

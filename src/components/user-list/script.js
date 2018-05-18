@@ -21,43 +21,18 @@ export default {
       },
       formRule: {
         username: [
-          {
-            required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         password: [
-          {
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          },
-          {
-            min: 3,
-            max: 16,
-            message: '密码为 3 - 16 位长度',
-            trigger: 'blur'
-          }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 16, message: '密码为 3 - 16 位长度', trigger: 'blur' }
         ],
         email: [
-          {
-            required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          },
-          {
-            type: 'email',
-            message: '请输入正确的邮箱',
-            trigger: 'blur'
-          }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱', trigger: 'blur' }
         ],
         mobile: [
-          {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          }
+          { required: true, message: '请输入手机号', trigger: 'blur' }
         ]
       }
     }
