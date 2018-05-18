@@ -19,6 +19,11 @@ Vue.config.productionTip = false
 // Vue.prototype 中的任何成员都可以在组件中通过 this.xxx 来访问
 // 为了避免和组件本身的数据产生冲突，我们建议给原型增加的成员都叫 $xxx
 // 接下来你就可以在任何组件中不需要 import axios 直接 this.$http 来访问 axios 了
+
+// 配置 axios 请求的基准路径
+// 所有的 axios 请求都会把这个路径作为基准路径去请求
+axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
+
 Vue.prototype.$http = axios
 
 // 该规则用以 eslint 代码规范校验的临时规避

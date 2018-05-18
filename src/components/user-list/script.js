@@ -56,7 +56,7 @@ export default {
      * 分页请求用户列表
      */
     loadUsersByPage (page) {
-      this.$http.get('http://localhost:8888/api/private/v1/users', {
+      this.$http.get('/users', {
         headers: {
           Authorization: window.localStorage.getItem('token')
         },
@@ -89,7 +89,7 @@ export default {
     handleAddUser () {
       this.$http({
         method: 'post',
-        url: 'http://localhost:8888/api/private/v1/users',
+        url: '/users',
         data: this.addUserForm,
         headers: {
           Authorization: window.localStorage.getItem('token')
@@ -115,7 +115,7 @@ export default {
      */
     handleChangeState (item) {
       this.$http({
-        url: `http://localhost:8888/api/private/v1/users/${item.id}/state/${item.mg_state}`,
+        url: `/users/${item.id}/state/${item.mg_state}`,
         method: 'put',
         headers: {
           Authorization: window.localStorage.getItem('token')
@@ -140,7 +140,7 @@ export default {
         type: 'warning'
       }).then(() => { // 用户点击 确定 执行这里
         this.$http({
-          url: `http://localhost:8888/api/private/v1/users/${item.id}`,
+          url: `/users/${item.id}`,
           method: 'delete',
           headers: {
             Authorization: window.localStorage.getItem('token')
@@ -169,7 +169,7 @@ export default {
     handleEditUser () {
       const {id, email, mobile} = this.editUserForm
       this.$http({
-        url: `http://localhost:8888/api/private/v1/users/${id}`,
+        url: `/users/${id}`,
         method: 'put',
         data: {
           email,
@@ -195,7 +195,7 @@ export default {
      */
     handleShowEditUser (item) {
       this.$http({
-        url: `http://localhost:8888/api/private/v1/users/${item.id}`,
+        url: `/users/${item.id}`,
         method: 'get',
         headers: {
           Authorization: window.localStorage.getItem('token')

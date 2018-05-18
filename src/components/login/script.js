@@ -26,7 +26,7 @@ export default {
         if (!valid) {
           return
         }
-        this.$http.post('http://localhost:8888/api/private/v1/login', this.loginForm)
+        this.$http.post('/login', this.loginForm)
           .then(res => {
             const {data, meta} = res.data
             const {msg, status} = meta
