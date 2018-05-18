@@ -16,15 +16,62 @@ export default {
         password: '',
         email: '',
         mobile: ''
+      },
+      formRule: {
+        username: [
+          {
+            required: true,
+            message: '请输入用户名',
+            trigger: 'blur'
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: '请输入密码',
+            trigger: 'blur'
+          },
+          {
+            min: 3,
+            max: 16,
+            message: '密码为 3 - 16 位长度',
+            trigger: 'blur'
+          }
+        ],
+        email: [
+          {
+            required: true,
+            message: '请输入用户名',
+            trigger: 'blur'
+          },
+          {
+            type: 'email',
+            message: '请输入正确的邮箱',
+            trigger: 'blur'
+          }
+        ],
+        mobile: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          }
+        ]
       }
     }
   },
   methods: {
+    /**
+     * 页码改变加载对应页码数据
+     */
     handleCurrentChange (page) {
       // 在页码改变的时候，请求加载该页码对应的数据
       this.loadUsersByPage(page)
     },
 
+    /**
+     * 分页请求用户列表
+     */
     loadUsersByPage (page) {
       // 1. 除了登陆接口，其它接口都需要 token 认证
       // 2. 我们要做的就是按照服务器接口的要求，把 token 放到请求头的 Authorization 字段中
@@ -85,6 +132,33 @@ export default {
       // 点击搜索，调用请求方法加载数据列表
       // 请求方法中会去根据输入框中的内容进行搜索
       this.loadUsersByPage(1)
+    },
+
+    /**
+     * 添加用户
+     */
+    handleAddUser () {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8888/api/private/v1/users',
+        data: this.addUserForm,
+        headers: {
+          Authorization: window.localStorage.getItem('token')
+        }
+      }).then(res => {
+        if (res.data.meta.status === 201) {
+          this.$message({
+            type: 'success',
+            message: '添加用户成功'
+          })
+
+          // 关闭对话框
+          this.dialogFormVisible = false
+
+          // 清空表单
+          this.$refs['form'].resetFields()
+        }
+      })
     }
   }
 }
