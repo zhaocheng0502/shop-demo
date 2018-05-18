@@ -76,7 +76,7 @@
     </el-table-column>
     <el-table-column>
       <template slot-scope="scope">
-        <el-button type="primary" plain size="mini" @click="editDialogForm = true">编辑</el-button>
+        <el-button type="primary" plain size="mini" @click="handleShowEditUser(scope.row)">编辑</el-button>
         <el-button type="danger" plain size="mini" @click="handleDeleteUser(scope.row)">删除</el-button>
         <el-button type="info" plain size="mini">分配角色</el-button>
       </template>

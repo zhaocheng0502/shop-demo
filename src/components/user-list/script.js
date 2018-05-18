@@ -170,6 +170,24 @@ export default {
      */
     handleEditUser () {
       console.log('handleEditUser')
+    },
+
+    /**
+     * 显示编辑用户对话框
+     */
+    handleShowEditUser (item) {
+      axios({
+        url: `http://localhost:8888/api/private/v1/users/${item.id}`,
+        method: 'get',
+        headers: {
+          Authorization: window.localStorage.getItem('token')
+        }
+      }).then(res => {
+        if (res.data.meta.status === 200) {
+          this.editUserForm = res.data.data
+        }
+      })
+      this.editDialogForm = true
     }
   }
 }
