@@ -9,6 +9,7 @@ export default {
   data () {
     return {
       tableData: [],
+      currentPage: 1,
       total: 0,
       searchText: '',
       dialogFormVisible: false,
@@ -67,6 +68,7 @@ export default {
      * 页码改变加载对应页码数据
      */
     handleCurrentChange (page) {
+      this.currentPage = page // 页码改变的时候，修改 data 中的数据
       // 在页码改变的时候，请求加载该页码对应的数据
       this.loadUsersByPage(page)
     },
@@ -146,6 +148,39 @@ export default {
             message: `${item.mg_state ? '启用' : '禁用'}成功`
           })
         }
+      })
+    },
+
+    /**
+     * 删除用户
+     */
+    handleDeleteUser (item) {
+      this.$confirm('确认删除吗？', '删除提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => { // 用户点击 确定 执行这里
+        axios({
+          url: `http://localhost:8888/api/private/v1/users/${item.id}`,
+          method: 'delete',
+          headers: {
+            Authorization: window.localStorage.getItem('token')
+          }
+        }).then(res => {
+          if (res.data.meta.status === 200) {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            // 更新当前页的列表数据
+            this.loadUsersByPage(this.currentPage)
+          }
+        })
+      }).catch(() => { // 用户点击 取消 执行这里
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
       })
     }
   }
