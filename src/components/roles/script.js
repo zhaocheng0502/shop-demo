@@ -10,7 +10,8 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'authName'
-      }
+      },
+      defaultChecked: []
     }
   },
   methods: {
@@ -26,7 +27,18 @@ export default {
      * 显示角色授权对话框
      */
 
-    async showRightDialog () {
+    async showRightDialog (role) {
+      const tmp = []
+      role.children.forEach(level1 => {
+        level1.children.forEach(level2 => {
+          level2.children.forEach(level3 => {
+            tmp.push(level3.id)
+          })
+        })
+      })
+
+      this.defaultChecked = tmp
+
       const res = await this.$http('/rights/tree')
       const {meta, data} = res.data
       if (meta.status === 200) {
