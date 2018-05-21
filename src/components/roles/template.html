@@ -72,9 +72,45 @@
       <template slot-scope="scope">
         <el-button type="primary" plain size="mini">编辑</el-button>
         <el-button type="danger" plain size="mini">删除</el-button>
-        <el-button type="info" plain size="mini">分配权限</el-button>
+        <el-button type="info" plain size="mini" @click="showRightDialog">分配权限</el-button>
       </template>
     </el-table-column>
   </el-table>
   <!-- /权限表格列表 -->
+
+  <!-- 角色授权对话框 -->
+  <el-dialog
+    title="角色授权"
+    :visible.sync="rightDialogVisible"
+    width="30%">
+    <!--
+      data 树形控件需要的数据
+      show-checkbox 显示复选框
+      node-key
+      default-expanded-keys 用来指定哪些节点展开
+      default-checked-keys 用来指定哪些节点默认被选中
+      props 需要绑定一个对象，用来指定数据中的字段
+        {
+          children: '告诉树组件数据中的哪个字段存储了子列表',
+          label: '告诉树组件，节点名称是谁'
+        }
+
+      只要你把符合父子节点关系的数组给树组件，它会帮你完成树菜单遍历
+      props 绑定的对象中的
+        children 用来告诉树组件，哪个字段是子节点列表
+        label 用来告诉树组件，哪个字段是节点的名称
+     -->
+
+    <el-tree
+      :data="treeData"
+      show-checkbox
+      :default-expand-all="true"
+      :props="defaultProps">
+    </el-tree>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="rightDialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="rightDialogVisible = false">确 定</el-button>
+    </span>
+  </el-dialog>
+  <!-- /角色授权对话框 -->
 </div>
