@@ -71,25 +71,6 @@ export default {
     },
 
     /**
-     * 分页请求用户列表
-     */
-    // loadUsersByPage (page) {
-    //   this.$http.get('/users', {
-    //     params: {
-    //       pagenum: page,
-    //       pagesize: 2,
-    //       query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
-    //     }
-    //   }).then(res => {
-    //       const {data, meta} = res.data
-    //       if (meta.status === 200) {
-    //         this.tableData = data.users
-    //         this.total = data.total
-    //       }
-    //     })
-    // },
-
-    /**
      * 处理搜索
      */
     handleSearch () {
@@ -101,42 +82,42 @@ export default {
     /**
      * 添加用户
      */
-    handleAddUser () {
-      this.$http({
+    async handleAddUser () {
+      const res = await this.$http({
         method: 'post',
         url: '/users',
         data: this.addUserForm
-      }).then(res => {
-        if (res.data.meta.status === 201) {
-          this.$message({
-            type: 'success',
-            message: '添加用户成功'
-          })
-
-          // 关闭对话框
-          this.dialogFormVisible = false
-
-          // 清空表单
-          this.$refs['form'].resetFields()
-        }
       })
+
+      if (res.data.meta.status === 201) {
+        this.$message({
+          type: 'success',
+          message: '添加用户成功'
+        })
+
+        // 关闭对话框
+        this.dialogFormVisible = false
+
+        // 清空表单
+        this.$refs['form'].resetFields()
+      }
     },
 
     /**
      * 处理改变用户状态
      */
-    handleChangeState (item) {
-      this.$http({
+    async handleChangeState (item) {
+      const res = await this.$http({
         url: `/users/${item.id}/state/${item.mg_state}`,
         method: 'put'
-      }).then(res => {
-        if (res.data.meta.status === 200) {
-          this.$message({
-            type: 'success',
-            message: `${item.mg_state ? '启用' : '禁用'}成功`
-          })
-        }
       })
+
+      if (res.data.meta.status === 200) {
+        this.$message({
+          type: 'success',
+          message: `${item.mg_state ? '启用' : '禁用'}成功`
+        })
+      }
     },
 
     /**
@@ -147,20 +128,20 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => { // 用户点击 确定 执行这里
-        this.$http({
+      }).then(async () => { // 用户点击 确定 执行这里
+        const res = await this.$http({
           url: `/users/${item.id}`,
           method: 'delete'
-        }).then(res => {
-          if (res.data.meta.status === 200) {
-            this.$message({
-              type: 'success',
-              message: '删除成功'
-            })
-            // 更新当前页的列表数据
-            this.loadUsersByPage(this.currentPage)
-          }
         })
+
+        if (res.data.meta.status === 200) {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          // 更新当前页的列表数据
+          this.loadUsersByPage(this.currentPage)
+        }
       }).catch(() => { // 用户点击 取消 执行这里
         this.$message({
           type: 'info',
@@ -172,40 +153,40 @@ export default {
     /**
      * 编辑用户
      */
-    handleEditUser () {
+    async handleEditUser () {
       const {id, email, mobile} = this.editUserForm
-      this.$http({
+      const res = await this.$http({
         url: `/users/${id}`,
         method: 'put',
         data: {
           email,
           mobile
         }
-      }).then(res => {
-        if (res.data.meta.status === 200) {
-          this.$message({
-            type: 'success',
-            message: '更新成功'
-          })
-          this.editDialogForm = false // 隐藏编辑对话框
-          this.loadUsersByPage(this.currentPage) // 更新当前页码列表数据
-        }
       })
+
+      if (res.data.meta.status === 200) {
+        this.$message({
+          type: 'success',
+          message: '更新成功'
+        })
+        this.editDialogForm = false // 隐藏编辑对话框
+        this.loadUsersByPage(this.currentPage) // 更新当前页码列表数据
+      }
     },
 
     /**
      * 显示编辑用户对话框
      */
-    handleShowEditUser (item) {
-      this.$http({
+    async handleShowEditUser (item) {
+      const res = await this.$http({
         url: `/users/${item.id}`,
         method: 'get'
-      }).then(res => {
-        if (res.data.meta.status === 200) {
-          this.editUserForm = res.data.data
-        }
       })
-      this.editDialogForm = true
+
+      if (res.data.meta.status === 200) {
+        this.editUserForm = res.data.data
+        this.editDialogForm = true
+      }
     }
   }
 }

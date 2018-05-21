@@ -22,29 +22,30 @@ export default {
      */
     handleLogin () {
       // ['form'] 中的 form 就是 el-form 标签 ref 属性值
-      this.$refs['form'].validate((valid) => {
+      this.$refs['form'].validate(async (valid) => {
         if (!valid) {
           return
         }
-        this.$http.post('/login', this.loginForm)
-          .then(res => {
-            const {data, meta} = res.data
-            const {msg, status} = meta
-            if (status === 200) {
-              // 将凭证放到到本地存储（会在路由守卫那里使用）
-              window.localStorage.setItem('token', data.token)
 
-              // 跳转到首页
-              this.$router.push('/')
+        const res = await this.$http.post('/login', this.loginForm)
 
-              this.$message({
-                message: '登陆成功',
-                type: 'success'
-              })
-            } else if (status === 400) {
-              this.$message.error(msg)
-            }
+        const {data, meta} = res.data
+        const {msg, status} = meta
+
+        if (status === 200) {
+          // 将凭证放到到本地存储（会在路由守卫那里使用）
+          window.localStorage.setItem('token', data.token)
+
+          // 跳转到首页
+          this.$router.push('/')
+
+          this.$message({
+            message: '登陆成功',
+            type: 'success'
           })
+        } else if (status === 400) {
+          this.$message.error(msg)
+        }
       })
     }
   }
