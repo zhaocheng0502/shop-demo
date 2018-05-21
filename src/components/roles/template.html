@@ -103,6 +103,7 @@
 
     <el-tree
       :data="treeData"
+      ref="rightTree"
       show-checkbox
       node-key="id"
       :default-expand-all="true"
@@ -111,7 +112,7 @@
     </el-tree>
     <span slot="footer" class="dialog-footer">
       <el-button @click="rightDialogVisible = false">取 消</el-button>
-      <el-button type="primary" @click="rightDialogVisible = false">确 定</el-button>
+      <el-button type="primary" @click="handleEditRight">确 定</el-button>
     </span>
   </el-dialog>
   <!-- /角色授权对话框 -->
