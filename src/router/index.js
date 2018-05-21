@@ -9,6 +9,8 @@ import Home from '@/components/home/home'
 
 import UserList from '@/components/user-list/user-list'
 
+import Rights from '@/components/rights'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -24,6 +26,10 @@ const router = new Router({
         {
           path: '/users',
           component: UserList
+        },
+        {
+          path: '/rights',
+          component: Rights
         }
       ]
     },
