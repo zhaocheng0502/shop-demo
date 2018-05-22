@@ -86,6 +86,22 @@ export default {
           message: '角色权限更新成功'
         })
       }
+    },
+
+    /**
+     * 删除角色指定权限
+     */
+    async handleDeleteRight (role, right) {
+      console.log('handleDeleteRight: ', role.id, right.id)
+      const res = await this.$http({
+        url: `/roles/${role.id}/rights/${right.id}`,
+        method: 'delete'
+      })
+      const {meta, data} = res.data
+      if (meta.status === 200) {
+        // 删除角色成功之后，服务器把该角色最新的权限列表返回给我们了
+        role.children = data
+      }
     }
   }
 }
