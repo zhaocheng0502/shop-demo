@@ -225,7 +225,22 @@ export default {
      * 处理编辑用户角色
      */
     async handleEditRole () {
-
+      const {id, rid} = this.editRoleUser
+      const res = await this.$http({
+        url: `users/${id}/role`,
+        method: 'put',
+        data: {
+          rid
+        }
+      })
+      const {meta, data} = res.data
+      if (meta.status === 200) {
+        this.$message({
+          type: 'success',
+          message: '分配角色成功'
+        })
+        this.editRoleDialog = false // 关闭分配角色对话框
+      }
     }
   }
 }
