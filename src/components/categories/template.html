@@ -1,4 +1,10 @@
 <div class="categories-wrap">
+  <el-row>
+    <el-col :span="4">
+      <el-button type="primary" @click="addCatDialog = true">添加分类</el-button>
+    </el-col>
+  </el-row>
+
   <!-- 数据表格列表 -->
   <el-table
     :data="tableData"
@@ -36,9 +42,11 @@
       :indent-size="40">
     </el-table-tree-column>
     <el-table-column
-      prop="cat_deleted
       label="是否有效"
       width="180">
+      <template slot-scope="scope">
+        {{ scope.row.cat_deleted }}
+      </template>
     </el-table-column>
     <el-table-column
       prop="cat_level"
@@ -48,8 +56,9 @@
     <el-table-column
       label="操作"
       width="180">
-      <template>
-        操作
+      <template slot-scope="scope">
+        <el-button size="mini" type="primary">编辑</el-button>
+        <el-button size="mini" type="danger">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -59,8 +68,29 @@
   <el-pagination
     background
     layout="prev, pager, next"
+    :page-size="5"
     :total="total"
     @current-change="handleCurrentChange">
   </el-pagination>
   <!-- /分页 -->
+
+  <!-- 添加分类对话框 -->
+  <el-dialog title="添加分类" :visible.sync="addCatDialog">
+    <el-form :model="addCatForm">
+      <el-form-item label="分类名称" label-width="120px">
+        <el-input v-model="addCatForm.cat_name" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="父级分类" label-width="120px">
+        <el-select v-model="addCatForm.cat_pid" placeholder="请选择父级父类">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="addCatDialog = false">取 消</el-button>
+      <el-button type="primary" @click="addCatDialog = false">确 定</el-button>
+    </div>
+  </el-dialog>
+  <!-- /添加分类对话框 -->
 </div>

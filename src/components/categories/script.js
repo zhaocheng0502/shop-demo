@@ -6,7 +6,9 @@ export default {
     return {
       tableData: [],
       total: 0,
-      loading: true
+      loading: true,
+      addCatDialog: false,
+      addCatForm: {}
     }
   },
   methods: {
