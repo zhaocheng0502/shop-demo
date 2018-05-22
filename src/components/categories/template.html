@@ -1,6 +1,8 @@
 <div class="categories-wrap">
+  <!-- 数据表格列表 -->
   <el-table
     :data="tableData"
+    v-loading="loading"
     style="width: 100%">
     <!--
       参考文档：https://github.com/foolishchow/element-tree-grid
@@ -51,4 +53,14 @@
       </template>
     </el-table-column>
   </el-table>
+  <!-- /数据表格列表 -->
+
+  <!-- 分页 -->
+  <el-pagination
+    background
+    layout="prev, pager, next"
+    :total="total"
+    @current-change="handleCurrentChange">
+  </el-pagination>
+  <!-- /分页 -->
 </div>
