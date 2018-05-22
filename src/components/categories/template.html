@@ -1,7 +1,7 @@
 <div class="categories-wrap">
   <el-row>
     <el-col :span="4">
-      <el-button type="primary" @click="addCatDialog = true">添加分类</el-button>
+      <el-button type="primary" @click="handleShowAddCat">添加分类</el-button>
     </el-col>
   </el-row>
 
@@ -81,10 +81,14 @@
         <el-input v-model="addCatForm.cat_name" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="父级分类" label-width="120px">
-        <el-select v-model="addCatForm.cat_pid" placeholder="请选择父级父类">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
+        <el-cascader
+          :props="{
+            label: 'cat_name',
+            children: 'children',
+            value: 'cat_id'
+          }"
+          :options="options">
+        </el-cascader>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">

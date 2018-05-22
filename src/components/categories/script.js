@@ -8,7 +8,8 @@ export default {
       total: 0,
       loading: true,
       addCatDialog: false,
-      addCatForm: {}
+      addCatForm: {},
+      options: []
     }
   },
   methods: {
@@ -35,6 +36,24 @@ export default {
      */
     handleCurrentChange (page) {
       this.loadCategories(page)
+    },
+
+    /**
+     * 处理显示添加分类对话框
+     */
+    async handleShowAddCat () {
+      const res = await this.$http({
+        url: '/categories',
+        method: 'get',
+        params: {
+          type: 2 // 只加载二级分类列表数据
+        }
+      })
+      const {meta, data} = res.data
+      if (meta.status === 200) {
+        this.options = data
+        this.addCatDialog = true // 显示弹框
+      }
     }
   }
 }
