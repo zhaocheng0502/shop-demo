@@ -1,0 +1,54 @@
+<div class="categories-wrap">
+  <el-table
+    :data="tableData"
+    style="width: 100%">
+    <!--
+      参考文档：https://github.com/foolishchow/element-tree-grid
+      1. yarn add element-tree-grid
+      2. 在 main.js 中
+          import ElTreeGrid from 'element-tree-grid'
+          Vue.component(ElTreeGrid.name, ElTreeGrid)
+      3. 看着文档去使用
+
+      tableData 是一个树结构的数据
+      prop 用来告诉树组件，数据中的哪个字段是节点文本
+      label 用来设置当前列的标题
+      child-key 用来告诉表格树组件，数据中的哪个字段是孩子
+      indent-size 用来设定不同级别的节点的缩进大小
+      treeKey 用来指定节点的唯一标识，默认使用数据中的 id 字段
+      parentKey 用来指定节点的父节点标识，默认字段是 parent_id
+      levelKey 用来指定节点的级别，默认字段是 depth
+     -->
+    <el-table-tree-column
+      fixed :expand-all="!!!1"
+      file-icon="icon icon-file"
+      folder-icon="icon icon-folder"
+      prop="cat_name"
+      label="分类名称"
+      child-key="children"
+      treeKey="cat_id"
+      parentKey="cat_pid"
+      :show-overflow-tooltip="true"
+      levelKey="cat_level"
+      width="320"
+      :indent-size="40">
+    </el-table-tree-column>
+    <el-table-column
+      prop="cat_deleted
+      label="是否有效"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="cat_level"
+      label="排序"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      label="操作"
+      width="180">
+      <template>
+        操作
+      </template>
+    </el-table-column>
+  </el-table>
+</div>
