@@ -23,14 +23,20 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-submenu index="1">
+        <el-submenu
+          v-for="level1 in menus"
+          :index="level1.path"
+          :key="level1.id">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>用户管理</span>
+            <span>{{ level1.authName }}</span>
           </template>
-          <el-menu-item index="/users">用户列表</el-menu-item>
+          <el-menu-item
+            :index="'/' + level2.path"
+            v-for="level2 in level1.children"
+            :key="level2.id">{{ level2.authName }}</el-menu-item>
         </el-submenu>
-        <el-submenu index="2">
+        <!-- <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-location"></i>
             <span>权限管理</span>
@@ -60,7 +66,7 @@
             <span>数据统计</span>
           </template>
           <el-menu-item index="5-1">数据报表</el-menu-item>
-        </el-submenu>
+        </el-submenu> -->
       </el-menu>
     </el-aside>
     <el-main class="main">
@@ -72,8 +78,13 @@
 
 <script>
 export default {
+  created () {
+    this.loadMenus()
+  },
   data () {
-    return {}
+    return {
+      menus: []
+    }
   },
   methods: {
     /**
@@ -115,6 +126,20 @@ export default {
           message: '已取消退出'
         })
       })
+    },
+
+    /**
+     * 加载左侧菜单权限列表
+     */
+    async loadMenus () {
+      const res = await this.$http({
+        url: '/menus',
+        method: 'get'
+      })
+      const {meta, data} = res.data
+      if (meta.status === 200) {
+        this.menus = data
+      }
     }
   }
 }
