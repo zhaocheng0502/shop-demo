@@ -34,7 +34,7 @@ fs.mkdir(`./src/components/${componentName}`, err => {
   }
   fs.writeFile(`./src/components/${componentName}/index.vue`, vueTpl,() => {})
   fs.writeFile(`./src/components/${componentName}/template.html`, templateTpl, () => {})
-  fs.writeFile(`./src/components/${componentName}/scirpt.js`, scriptTpl, () => {})
+  fs.writeFile(`./src/components/${componentName}/script.js`, scriptTpl, () => {})
   fs.writeFile(`./src/components/${componentName}/style.css`, styleTpl, () => {})
   console.log('组件创建成功！')
 })
