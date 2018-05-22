@@ -38,6 +38,12 @@ export default {
         username: '',
         email: '',
         mobile: ''
+      },
+      editRoleDialog: false,
+      roles: [],
+      editRoleUser: {
+        username: '',
+        rid: 0
       }
     }
   },
@@ -187,6 +193,39 @@ export default {
         this.editUserForm = res.data.data
         this.editDialogForm = true
       }
+    },
+
+    /**
+     * 显示编辑用户角色对话框
+     */
+    async handleShowEditRole (user) {
+      // 1. 根据用户 id 获取用户的完整信息
+      const userRes = await this.$http({
+        url: `/users/${user.id}`
+      })
+
+      if (userRes.data.meta.status === 200) {
+        this.editRoleUser = userRes.data.data
+      }
+
+      // 2. 加载角色列表
+      const res = await this.$http({
+        url: '/roles',
+        method: 'get'
+      })
+
+      const {meta, data} = res.data
+      if (meta.status === 200) {
+        this.roles = data
+        this.editRoleDialog = true // 显示对话框
+      }
+    },
+
+    /**
+     * 处理编辑用户角色
+     */
+    async handleEditRole () {
+
     }
   }
 }
