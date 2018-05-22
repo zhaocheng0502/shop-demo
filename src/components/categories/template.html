@@ -77,23 +77,28 @@
   <!-- 添加分类对话框 -->
   <el-dialog title="添加分类" :visible.sync="addCatDialog">
     <el-form :model="addCatForm">
-      <el-form-item label="分类名称" label-width="120px">
+      <el-form-item label="分类名称" label-width="80px">
         <el-input v-model="addCatForm.cat_name" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="父级分类" label-width="120px">
+      <el-form-item label="父级分类" label-width="80px">
+        <!--
+          级联选择器会把选中的结果同步到 addCatForm.cat_pid
+         -->
         <el-cascader
           :props="{
             label: 'cat_name',
             children: 'children',
             value: 'cat_id'
           }"
-          :options="options">
+          v-model="addCatForm.cat_pid"
+          :options="options"
+          :change-on-select="true">
         </el-cascader>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="addCatDialog = false">取 消</el-button>
-      <el-button type="primary" @click="addCatDialog = false">确 定</el-button>
+      <el-button type="primary" @click="handleAddCat">确 定</el-button>
     </div>
   </el-dialog>
   <!-- /添加分类对话框 -->

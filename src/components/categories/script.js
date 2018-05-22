@@ -8,7 +8,10 @@ export default {
       total: 0,
       loading: true,
       addCatDialog: false,
-      addCatForm: {},
+      addCatForm: {
+        cat_name: '',
+        cat_pid: []
+      },
       options: []
     }
   },
@@ -53,6 +56,32 @@ export default {
       if (meta.status === 200) {
         this.options = data
         this.addCatDialog = true // 显示弹框
+      }
+    },
+
+    /**
+     * 处理添加分类
+     */
+    async handleAddCat () {
+      const {cat_name, cat_pid} = this.addCatForm
+
+      const res = await this.$http({
+        url: '/categories',
+        method: 'post',
+        data: {
+          cat_pid: cat_pid[cat_pid.length - 1],
+          cat_name,
+          cat_level: cat_pid.length
+        }
+      })
+      const {data, meta} = res.data
+      if (meta.status === 201) {
+        this.$message({
+          type: 'success',
+          message: '添加分类成功'
+        })
+        this.loadCategories() // 重新加载列表数据
+        this.addCatDialog = false // 隐藏对话框
       }
     }
   }
