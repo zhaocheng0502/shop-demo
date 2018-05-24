@@ -24,6 +24,12 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    // 这句话就是告诉 webpack 当我 import BMap 的时候使用全局的 BMap
+    // 然后就可以在项目中 import BMap 了
+    // 实际上加载的是 index.html 页面中引入的 script JavaScript 文件
+    "BMap": "BMap"
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

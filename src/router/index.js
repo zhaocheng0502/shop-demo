@@ -24,6 +24,15 @@ import Goods from '@/components/goods'
 // 添加商品
 import GoodsAdd from '@/components/goods-add'
 
+// 订单列表
+import Orders from '@/components/orders'
+
+// 百度地图测试组件
+import BdMapTest from '@/components/bdmap-test'
+
+// echarts 测试组件
+import EchartsDemo from '@/components/echarts-demo'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -59,6 +68,18 @@ const router = new Router({
         {
           path: '/goods-add',
           component: GoodsAdd
+        },
+        {
+          path: '/orders',
+          component: Orders
+        },
+        {
+          path: '/bdmap-test',
+          component: BdMapTest
+        },
+        {
+          path: '/echarts-demo',
+          component: EchartsDemo
         }
       ]
     },
