@@ -1,7 +1,10 @@
 export default {
-  created () {},
+  created () {
+  },
   data () {
-    return {}
+    return {
+      form: {}
+    }
   },
   methods: {}
 }
