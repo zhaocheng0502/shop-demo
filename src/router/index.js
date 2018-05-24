@@ -21,6 +21,9 @@ import Categories from '@/components/categories'
 // 商品列表
 import Goods from '@/components/goods'
 
+// 添加商品
+import GoodsAdd from '@/components/goods-add'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -52,6 +55,10 @@ const router = new Router({
         {
           path: '/goods',
           component: Goods
+        },
+        {
+          path: '/goods-add',
+          component: GoodsAdd
         }
       ]
     },

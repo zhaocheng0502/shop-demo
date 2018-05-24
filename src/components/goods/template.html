@@ -1,4 +1,9 @@
 <div class="goods-wrap">
+  <el-row>
+    <el-col :span="4">
+      <el-button @click="$router.push('/goods-add')">添加商品</el-button>
+    </el-col>
+  </el-row>
   <el-table
     :data="tableData"
     v-loading="loading"

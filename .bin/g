@@ -1,4 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
+const path = require('path')
 
 const componentName = process.argv[2]
 
@@ -26,15 +29,17 @@ const styleTpl = `.${componentName}-wrap {
 }
 `
 
-fs.mkdir(`./src/components/${componentName}`, err => {
+const componentAbsPath = path.join(__dirname, `../src/components/${componentName}`)
+
+fs.mkdir(componentAbsPath, err => {
   if (err) {
     console.error(`组件创建失败！`)
     console.error('    ' + err.message)
     return
   }
-  fs.writeFile(`./src/components/${componentName}/index.vue`, vueTpl,() => {})
-  fs.writeFile(`./src/components/${componentName}/template.html`, templateTpl, () => {})
-  fs.writeFile(`./src/components/${componentName}/script.js`, scriptTpl, () => {})
-  fs.writeFile(`./src/components/${componentName}/style.css`, styleTpl, () => {})
+  fs.writeFile(path.join(componentAbsPath, '/index.vue'), vueTpl,() => {})
+  fs.writeFile(path.join(componentAbsPath, '/template.html'), templateTpl, () => {})
+  fs.writeFile(path.join(componentAbsPath, '/script.js'), scriptTpl, () => {})
+  fs.writeFile(path.join(componentAbsPath, '/style.css'), styleTpl, () => {})
   console.log('组件创建成功！')
 })
