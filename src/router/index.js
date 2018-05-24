@@ -18,6 +18,9 @@ import Roles from '@/components/roles'
 // 商品分类
 import Categories from '@/components/categories'
 
+// 商品列表
+import Goods from '@/components/goods'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -45,6 +48,10 @@ const router = new Router({
         {
           path: '/categories',
           component: Categories
+        },
+        {
+          path: '/goods',
+          component: Goods
         }
       ]
     },
