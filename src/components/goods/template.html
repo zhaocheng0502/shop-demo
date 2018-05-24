@@ -38,9 +38,12 @@
   <!-- 分页 -->
   <el-pagination
     background
-    layout="prev, pager, next"
+    layout="total, sizes, prev, pager, next"
+    :page-sizes="[10, 20, 30, 40, 50]"
     :page-size="5"
+    @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
+    :current-page.sync="currentPage"
     :total="total">
   </el-pagination>
   <!-- /分页 -->
