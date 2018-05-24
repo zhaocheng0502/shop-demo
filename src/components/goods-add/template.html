@@ -37,12 +37,37 @@
             <el-radio :label="false">否</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="handleAdd">立即创建</el-button>
-        </el-form-item>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="商品图片">商品图片</el-tab-pane>
-    <el-tab-pane label="商品详情">商品详情</el-tab-pane>
+    <el-tab-pane label="商品图片">
+      <!--
+        element 的上传组件已经把上传的请求都帮你封装好了
+        你要做的就是配置你的上传路径等信息，它会帮你自动完成上传
+        action 指定上传的路径地址
+        fileList 用来存储上传好的图片路径地址\
+
+        图片上传组件会自动去帮你请求你指定的 action
+        它发送的请求不是私用 axios 发的请求，所以就不会经过 axios 的请求拦截器，也就不会携带 token
+        图片上传组件支持配置自定义请求头
+       -->
+      <el-upload
+        action="http://localhost:8888/api/private/v1/upload"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :on-success="handleUploadSuccess"
+        :file-list="fileList"
+        :headers="headers"
+        list-type="picture">
+        <el-button size="small" type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
+    </el-tab-pane>
+    <el-tab-pane label="商品详情">
+      <el-row>
+        <el-col :span="4" :offset="4">
+          <el-button type="primary" @click="handleAdd">立即创建</el-button>
+        </el-col>
+      </el-row>
+    </el-tab-pane>
   </el-tabs>
 </div>
