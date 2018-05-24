@@ -1,3 +1,9 @@
+// 富文本编辑器相关资源
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+import { quillEditor } from 'vue-quill-editor'
+
 export default {
   created () {
     this.loadCategories()
@@ -15,9 +21,13 @@ export default {
           // {
           //   "pic": "tmp_uploads/2fd6791f5aa96f5bf3e36a8af1e177dd.png"
           // }
-        ]
+        ],
+        goods_introduce: ''
       },
+      tabActiveName: 'first',
+      defaultStepActive: 0,
       options: [],
+      editorOption: {}, // 富文本编辑器配置对象
       fileList: [
         // {name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
         // {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
@@ -58,7 +68,14 @@ export default {
         }
       })
 
-      console.log(res.data)
+      const {meta, data} = res.data
+      if (meta.status === 201) {
+        this.$message({
+          type: 'success',
+          message: '添加商品成功'
+        })
+        this.$router.push('/goods')
+      }
     },
 
     handleRemove(file, fileList) {
@@ -73,6 +90,30 @@ export default {
       this.form.pics.push({
         pic: response.data.tmp_path
       })
+    },
+
+    onEditorBlur () {
+      console.log('onEditorBlur')
+    },
+
+    onEditorFocus () {
+      console.log('onEditorFocus')
+    },
+
+    onEditorReady () {
+      console.log('onEditorReady')
+    },
+
+    handleNextStep (tabName, step) {
+      this.tabActiveName = tabName
+      this.defaultStepActive = step
+    },
+
+    handleTabClick (tab) {
+      this.defaultStepActive = tab.index - 0
     }
+  },
+  components: {
+    quillEditor
   }
 }
