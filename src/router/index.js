@@ -4,34 +4,34 @@ import Router from 'vue-router'
 // 加载路径中可以使用 @ 绝对路径
 // @ 是 src 目录的绝对路径
 // @ 后面的 / 别忘了
-import Login from '@/components/login/login'
-import Home from '@/components/home/home'
+const Login = () => import('@/components/login/login')
+const Home = () => import('@/components/home/home')
 
-import UserList from '@/components/user-list/user-list'
+const UserList = () => import('@/components/user-list/user-list')
 
 // 权限列表
-import Rights from '@/components/rights'
+const Rights = () => import('@/components/rights')
 
 // 角色列表
-import Roles from '@/components/roles'
+const Roles = () => import('@/components/roles')
 
 // 商品分类
-import Categories from '@/components/categories'
+const Categories = () => import('@/components/categories')
 
 // 商品列表
-import Goods from '@/components/goods'
+const Goods = () => import('@/components/goods')
 
 // 添加商品
-import GoodsAdd from '@/components/goods-add'
+const GoodsAdd = () => import('@/components/goods-add')
 
 // 订单列表
-import Orders from '@/components/orders'
+const Orders = () => import('@/components/orders')
 
 // 百度地图测试组件
-import BdMapTest from '@/components/bdmap-test'
+const BdMapTest = () => import('@/components/bdmap-test')
 
 // echarts 测试组件
-import EchartsDemo from '@/components/echarts-demo'
+const EchartsDemo = () => import('@/components/echarts-demo')
 
 Vue.use(Router)
 
