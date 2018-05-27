@@ -1,3 +1,5 @@
+import * as User from '@/api/user'
+
 export default {
   created () {
     // 页码第一次加载，显示第1页数据
@@ -58,23 +60,33 @@ export default {
       this.loadUsersByPage(page)
     },
 
+    async loadUsersByPage (page) {
+      const data = await User.findAll({
+        pagenum: page,
+        pagesize: 2,
+        query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
+      })
+      this.tableData = data.users
+      this.total = data.total
+    },
+
     /**
      * async 方式请求数据
      */
-    async loadUsersByPage (page) {
-      const res = await this.$http.get('/users', {
-        params: {
-          pagenum: page,
-          pagesize: 2,
-          query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
-        }
-      })
-      const {data, meta} = res.data
-      if (meta.status === 200) {
-        this.tableData = data.users
-        this.total = data.total
-      }
-    },
+    // async loadUsersByPage (page) {
+    //   const res = await this.$http.get('/users', {
+    //     params: {
+    //       pagenum: page,
+    //       pagesize: 2,
+    //       query: this.searchText  // query 参数可选，用来指定查询的筛选条件，这里的筛选条件是用户名
+    //     }
+    //   })
+    //   const {data, meta} = res.data
+    //   if (meta.status === 200) {
+    //     this.tableData = data.users
+    //     this.total = data.total
+    //   }
+    // },
 
     /**
      * 处理搜索
