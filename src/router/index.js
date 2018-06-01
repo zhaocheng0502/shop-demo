@@ -33,6 +33,8 @@ const BdMapTest = () => import('@/components/bdmap-test')
 // echarts 测试组件
 const EchartsDemo = () => import('@/components/echarts-demo')
 
+const VuexDemo = () => import('@/components/vuex-demo')
+
 Vue.use(Router)
 
 const router = new Router({
@@ -80,6 +82,10 @@ const router = new Router({
         {
           path: '/echarts-demo',
           component: EchartsDemo
+        },
+        {
+          path: '/vuex-demo',
+          component: VuexDemo
         }
       ]
     },

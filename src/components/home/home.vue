@@ -5,7 +5,8 @@
       <el-col :span="4">
         <img src="./logo.png" alt="黑马程序员">
       </el-col>
-      <el-col :span="16">电商后台管理系统</el-col>
+      <el-col :span="14">电商后台管理系统</el-col>
+      <el-col :span="2">{{ count }}</el-col>
       <el-col :span="4">
         <a @click.prevent="handleLogout" href="#">退出</a>
       </el-col>
@@ -140,6 +141,12 @@ export default {
       if (meta.status === 200) {
         this.menus = data
       }
+    }
+  },
+
+  computed: {
+    count () {
+      return this.$store.state.count
     }
   }
 }

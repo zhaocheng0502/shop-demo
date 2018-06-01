@@ -8,12 +8,14 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import ElTreeGrid from 'element-tree-grid'
 import './assets/css/index.css'
+import store from './store'
 
 Vue.use(ElementUI)
 
 Vue.component(ElTreeGrid.name, ElTreeGrid)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
+Vue.config.devtools = true // 允许启用开发者调试工具
 
 // Vue 是构造函数
 // 所有组件都是 Vue 的实例
@@ -47,6 +49,7 @@ Vue.prototype.$http = axios
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
